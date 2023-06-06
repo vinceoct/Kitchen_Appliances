@@ -1,4 +1,4 @@
-const { Fridge } = require('../models')
+const { Appliances } = require('../models')
 const db = require('../db')
 
 module.exports = {}

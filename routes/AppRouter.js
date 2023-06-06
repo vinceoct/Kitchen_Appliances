@@ -1,7 +1,9 @@
 const Router = require('express').Router()
 
-const AirFryerRouter = require('./airfryerRouter')
-const FridgeRouter = require('./fridgeRouter')
+const ApplianceRouter = require('./appliancesRouter')
 
-Router.use('/airfryers', AirFryerRouter )
-Router.use('/refridgerators', FridgeRouter) 
+
+Router.use('/appliances', ApplianceRouter )
+
+
+module.exports = Router
