@@ -1,13 +1,9 @@
 const mongoose = require('mongoose')
-const fridgeSchema = require('./fridgeModel.js')
-const airfryerSchema = require('./airfryerModel.js')
+const applianceSchema = require('./appliancesModel.js')
 
-
-const Fridge = mongoose.model('Fridge', fridgeSchema)
-const AirFryer= mongoose.model('AirFryer', airfryerSchema)
+const Appliances= mongoose.model('Appliance', applianceSchema)
 
 
 module.exports = {
-    Fridge,
-    AirFryer
+    Appliances,
 }
