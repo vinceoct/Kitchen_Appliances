@@ -2,11 +2,11 @@ const mongoose = require(`mongoose`)
 const { Schema } = mongoose.Schema
 const db = require(`../db`)
 
-const AirFryer = new Schema(
+const Appliances = new Schema(
     {
 
     }
     
 )
 
-module.exports = AirFryer
+module.exports = Appliances
