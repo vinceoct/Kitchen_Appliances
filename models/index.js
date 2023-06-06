@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
-const applianceSchema = require('./appliancesModel.js')
+const applianceSchema = require('./appliancesModel')
 
-const Appliances= mongoose.model('Appliance', applianceSchema)
+const Appliance = mongoose.model('Appliance', applianceSchema)
 
 
-module.exports = {
-    Appliances,
-}
+module.exports = Appliance

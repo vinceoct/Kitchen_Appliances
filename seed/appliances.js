@@ -1,10 +1,10 @@
 const db = require('../db')
-const Appliance = require('../models/appliancesModel')
+const Appliance = require('../models')
 
-// db.on('error', console.error.bind(console, "MongoDB connection error:"))
+db.on('error', console.error.bind(console, "MongoDB connection error:"))
 
 const main = async () => {
-    const Appliances = [
+    const appliances = [
         {
             name: 'Microwave Oven',
             brand: 'Panasonic',
@@ -60,7 +60,8 @@ const main = async () => {
         }
 
     ]
-    await Appliance.insertMany(Appliances)
+    await Appliance.deleteMany()
+    await Appliance.insertMany(appliances)
     console.log('Placed Appliances.') 
 }
 const run = async () => {
