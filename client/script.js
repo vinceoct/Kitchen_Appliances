@@ -43,17 +43,12 @@ options.forEach((option)=>{
   let itemDescrip = document.createElement("h2")
   itemDescrip.innerText=option.description
   categoryOptions.appendChild(itemDescrip)
-
-
   //make an element 
   //give it an attribute class or id
   //populate it iwith data 
   //give it a place to go append it 
 //dom manip via for each loop
-
 })
-
-
     // displayCategoryOptions('air-fryers', options);
   } catch (error) {
     console.error('Error fetching Airfryer options:', error);
@@ -66,22 +61,67 @@ async function fetchMicrowaveOptions() {
 
   try {
     const response = await axios.get(apiUrl);
-    const options = response.data;
+    const options = response.data.appliances;
+  console.log(options)
+  
+  options.forEach((option)=>{
+    console.log(option)
+    let itemDiv = document.createElement("div")
 
-    displayCategoryOptions('microwaves', options);
+    let itemName = document.createElement("h1")
+    console.log(option.name)
+    itemName.innerText=option.name
+    let categoryOptions = document.getElementById("microwaves")
+      categoryOptions.appendChild(itemName)
+      let itemImage = document.createElement("img")
+  itemImage.src= option.image
+  itemImage.classList.add("microwaves")
+  categoryOptions.appendChild(itemImage)
+  let itemDescrip = document.createElement("h2")
+  itemDescrip.innerText=option.description
+  categoryOptions.appendChild(itemDescrip)
+  })
+
+    // displayCategoryOptions('microwaves', options);
   } catch (error) {
     console.error('Error fetching Microwave options:', error);
   }
+  console.log(apiUrl)
 }
+
+
+
+
+
 
 async function fetchRefrigeratorOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances/type/Refrigerator';
 
   try {
     const response = await axios.get(apiUrl);
-    const options = response.data;
+    const options = response.data.appliances;
+  console.log(options)
+  
+  options.forEach((option)=>{
+    console.log(option)
+    let itemDiv = document.createElement("div")
 
-    displayCategoryOptions('fridges', options);
+    let itemName = document.createElement("h1")
+    console.log(option.name)
+    itemName.innerText=option.name
+    let categoryOptions = document.getElementById("fridges")
+      categoryOptions.appendChild(itemName)
+      let itemImage = document.createElement("img")
+  itemImage.src= option.image
+  itemImage.classList.add("fridges")
+  categoryOptions.appendChild(itemImage)
+  let itemDescrip = document.createElement("h2")
+  itemDescrip.innerText=option.description
+  categoryOptions.appendChild(itemDescrip)
+  })
+  
+
+    // displayCategoryOptions('fridges', options);
   } catch (error) {
     console.error('Error fetching Refrigerator options:', error);
   }
