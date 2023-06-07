@@ -19,11 +19,26 @@ const getApplianceById = async (req, res) => {
         }
         return res.status(404).send('appliance does not exist')
     }catch (e){
-        return res.status(500).send(error.message)
+        return res.status(500).send(e.message)
     }
 }
+
+const getAppliancesByType = async (req, res) => {
+    try {
+        const { value } = req.params
+        const appliances = await Appliance.find({ type: value })
+        if(appliances) {
+            return res.status(200).json({ appliances })
+        }
+        return res.status(404).send('no appliances of that type')
+    }catch (e){
+        return res.status(500).send(`${e.message} line 35`)
+    }
+}
+
 
 module.exports = {
     getAllAppliances, 
     getApplianceById,
+    getAppliancesByType
 }
