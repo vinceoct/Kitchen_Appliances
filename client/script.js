@@ -29,13 +29,20 @@ console.log(options)
 
 options.forEach((option)=>{
   console.log(option)
-  let itemDiv= document.createElement("div") 
+  let itemDiv = document.createElement("div") 
 
   let itemName = document.createElement("h1")
   console.log(option.name)
   itemName.innerText= option.name
   let categoryOptions= document.getElementById("air-fryers")
    categoryOptions.appendChild(itemName)
+  let itemImage = document.createElement("img")
+  itemImage.src= option.image
+  itemImage.classList.add("airFryer")
+  categoryOptions.appendChild(itemImage)
+  let itemDescrip = document.createElement("h2")
+  itemDescrip.innerText=option.description
+  categoryOptions.appendChild(itemDescrip)
 
 
   //make an element 
