@@ -36,9 +36,50 @@ const getAppliancesByType = async (req, res) => {
     }
 }
 
+const createAppliance = async (req, res) => {
+    try{
+        const appliance = await new Appliance(req.body)
+        await appliance.save()
+        return res.status(201).json({
+            appliance,
+        });
+    } catch (error) {
+        return res.status(500).json({ error: error.message })
+    }
+}
 
+
+const updateAppliance = async (req, res) => {
+    try {
+        let { id } = req.params;
+        let appliance = await Appliance.findByIdAndUpdate(id, req.body, { new: true})
+        if (appliance) {
+            return res.status(200).json(appliance)
+        }
+        throw new Error("Appliance not found")
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
+
+const deleteAppliance = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleted = await Appliance.findByIdAndDelete(id)
+        if (deleted) {
+            return res.status(200).send("Appliance deleted");
+        }
+        throw new Error("Appliance not found");
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
 module.exports = {
     getAllAppliances, 
     getApplianceById,
-    getAppliancesByType
+    getAppliancesByType,
+    createAppliance,
+    updateAppliance,
+    deleteAppliance
 }
