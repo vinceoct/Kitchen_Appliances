@@ -33,6 +33,10 @@ async function fetchAirfryerOptions() {
       itemName.innerText = option.name;
       itemDiv.appendChild(itemName);
 
+      let itemPrice = document.createElement("h2");
+      itemPrice.innerText = "Price: $" + option.price;
+      itemDiv.appendChild(itemPrice);
+
       let itemImage = document.createElement("img");
       itemImage.src = option.image;
       itemImage.classList.add("airFryer");
@@ -44,6 +48,7 @@ async function fetchAirfryerOptions() {
 
       let addToCartButton = document.createElement("button");
       addToCartButton.innerText = "Add to Cart";
+      addToCartButton.classList.add("add-to-cart-button");
       addToCartButton.addEventListener("click", function() {
         addToCart(option.name, option.price, option.image);
       });
@@ -56,6 +61,7 @@ async function fetchAirfryerOptions() {
     console.error('Error fetching Airfryer options:', error);
   }
 }
+
 
 async function fetchMicrowaveOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances/type/Microwave';
@@ -71,6 +77,10 @@ async function fetchMicrowaveOptions() {
       itemName.innerText = option.name;
       itemDiv.appendChild(itemName);
 
+      let itemPrice = document.createElement("h2");
+      itemPrice.innerText = "Price: $" + option.price;
+      itemDiv.appendChild(itemPrice);
+
       let itemImage = document.createElement("img");
       itemImage.src = option.image;
       itemImage.classList.add("microwaves");
@@ -82,6 +92,7 @@ async function fetchMicrowaveOptions() {
 
       let addToCartButton = document.createElement("button");
       addToCartButton.innerText = "Add to Cart";
+      addToCartButton.classList.add("add-to-cart-button"); 
       addToCartButton.addEventListener("click", function() {
         addToCart(option.name, option.price, option.image);
       });
@@ -109,6 +120,10 @@ async function fetchRefrigeratorOptions() {
       itemName.innerText = option.name;
       itemDiv.appendChild(itemName);
 
+      let itemPrice = document.createElement("h2");
+      itemPrice.innerText = "Price: $" + option.price;
+      itemDiv.appendChild(itemPrice);
+
       let itemImage = document.createElement("img");
       itemImage.src = option.image;
       itemImage.classList.add("fridges");
@@ -120,6 +135,7 @@ async function fetchRefrigeratorOptions() {
 
       let addToCartButton = document.createElement("button");
       addToCartButton.innerText = "Add to Cart";
+      addToCartButton.classList.add("add-to-cart-button"); 
       addToCartButton.addEventListener("click", function() {
         addToCart(option.name, option.price, option.image);
       });
