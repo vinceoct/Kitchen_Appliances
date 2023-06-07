@@ -1,4 +1,6 @@
 const Router = require('express').Router()
-const controller = require('../controllers/appliancesController')
+const controllers = require('../controllers/appliancesController')
+
+Router.get('/', controllers.getAllAppliances)
 
 module.exports = Router
