@@ -21,39 +21,40 @@ function toggleOptions(category) {
 
 async function fetchAirfryerOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances/type/Airfryer';
- 
+
   try {
     const response = await axios.get(apiUrl);
     const options = response.data.appliances;
-console.log(options)
 
-options.forEach((option)=>{
-  console.log(option)
-  let itemDiv = document.createElement("div") 
+    options.forEach((option) => {
+      let itemDiv = document.createElement("div");
 
-  let itemName = document.createElement("h1")
-  console.log(option.name)
-  itemName.innerText= option.name
-  let categoryOptions= document.getElementById("air-fryers")
-   categoryOptions.appendChild(itemName)
-  let itemImage = document.createElement("img")
-  itemImage.src= option.image
-  itemImage.classList.add("airFryer")
-  categoryOptions.appendChild(itemImage)
-  let itemDescrip = document.createElement("h2")
-  itemDescrip.innerText=option.description
-  categoryOptions.appendChild(itemDescrip)
-  //make an element 
-  //give it an attribute class or id
-  //populate it iwith data 
-  //give it a place to go append it 
-//dom manip via for each loop
-})
-    // displayCategoryOptions('air-fryers', options);
+      let itemName = document.createElement("h1");
+      itemName.innerText = option.name;
+      itemDiv.appendChild(itemName);
+
+      let itemImage = document.createElement("img");
+      itemImage.src = option.image;
+      itemImage.classList.add("airFryer");
+      itemDiv.appendChild(itemImage);
+
+      let itemDescrip = document.createElement("h2");
+      itemDescrip.innerText = option.description;
+      itemDiv.appendChild(itemDescrip);
+
+      let addToCartButton = document.createElement("button");
+      addToCartButton.innerText = "Add to Cart";
+      addToCartButton.addEventListener("click", function() {
+        addToCart(option.name, option.price, option.image);
+      });
+      itemDiv.appendChild(addToCartButton);
+
+      let categoryOptions = document.getElementById("air-fryers");
+      categoryOptions.appendChild(itemDiv);
+    });
   } catch (error) {
     console.error('Error fetching Airfryer options:', error);
   }
-  console.log(apiUrl)
 }
 
 async function fetchMicrowaveOptions() {
@@ -62,37 +63,37 @@ async function fetchMicrowaveOptions() {
   try {
     const response = await axios.get(apiUrl);
     const options = response.data.appliances;
-  console.log(options)
-  
-  options.forEach((option)=>{
-    console.log(option)
-    let itemDiv = document.createElement("div")
 
-    let itemName = document.createElement("h1")
-    console.log(option.name)
-    itemName.innerText=option.name
-    let categoryOptions = document.getElementById("microwaves")
-      categoryOptions.appendChild(itemName)
-      let itemImage = document.createElement("img")
-  itemImage.src= option.image
-  itemImage.classList.add("microwaves")
-  categoryOptions.appendChild(itemImage)
-  let itemDescrip = document.createElement("h2")
-  itemDescrip.innerText=option.description
-  categoryOptions.appendChild(itemDescrip)
-  })
+    options.forEach((option) => {
+      let itemDiv = document.createElement("div");
 
-    // displayCategoryOptions('microwaves', options);
+      let itemName = document.createElement("h1");
+      itemName.innerText = option.name;
+      itemDiv.appendChild(itemName);
+
+      let itemImage = document.createElement("img");
+      itemImage.src = option.image;
+      itemImage.classList.add("microwaves");
+      itemDiv.appendChild(itemImage);
+
+      let itemDescrip = document.createElement("h2");
+      itemDescrip.innerText = option.description;
+      itemDiv.appendChild(itemDescrip);
+
+      let addToCartButton = document.createElement("button");
+      addToCartButton.innerText = "Add to Cart";
+      addToCartButton.addEventListener("click", function() {
+        addToCart(option.name, option.price, option.image);
+      });
+      itemDiv.appendChild(addToCartButton);
+
+      let categoryOptions = document.getElementById("microwaves");
+      categoryOptions.appendChild(itemDiv);
+    });
   } catch (error) {
     console.error('Error fetching Microwave options:', error);
   }
-  console.log(apiUrl)
 }
-
-
-
-
-
 
 async function fetchRefrigeratorOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances/type/Refrigerator';
@@ -100,72 +101,68 @@ async function fetchRefrigeratorOptions() {
   try {
     const response = await axios.get(apiUrl);
     const options = response.data.appliances;
-  console.log(options)
-  
-  options.forEach((option)=>{
-    console.log(option)
-    let itemDiv = document.createElement("div")
 
-    let itemName = document.createElement("h1")
-    console.log(option.name)
-    itemName.innerText=option.name
-    let categoryOptions = document.getElementById("fridges")
-      categoryOptions.appendChild(itemName)
-      let itemImage = document.createElement("img")
-  itemImage.src= option.image
-  itemImage.classList.add("fridges")
-  categoryOptions.appendChild(itemImage)
-  let itemDescrip = document.createElement("h2")
-  itemDescrip.innerText=option.description
-  categoryOptions.appendChild(itemDescrip)
-  })
-  
+    options.forEach((option) => {
+      let itemDiv = document.createElement("div");
 
-    // displayCategoryOptions('fridges', options);
+      let itemName = document.createElement("h1");
+      itemName.innerText = option.name;
+      itemDiv.appendChild(itemName);
+
+      let itemImage = document.createElement("img");
+      itemImage.src = option.image;
+      itemImage.classList.add("fridges");
+      itemDiv.appendChild(itemImage);
+
+      let itemDescrip = document.createElement("h2");
+      itemDescrip.innerText = option.description;
+      itemDiv.appendChild(itemDescrip);
+
+      let addToCartButton = document.createElement("button");
+      addToCartButton.innerText = "Add to Cart";
+      addToCartButton.addEventListener("click", function() {
+        addToCart(option.name, option.price, option.image);
+      });
+      itemDiv.appendChild(addToCartButton);
+
+      let categoryOptions = document.getElementById("fridges");
+      categoryOptions.appendChild(itemDiv);
+    });
   } catch (error) {
     console.error('Error fetching Refrigerator options:', error);
   }
 }
 
-function displayCategoryOptions(category, options) {
-  const categoryOptionsDiv = document.getElementById(category);
-  categoryOptionsDiv.innerHTML = '';
+function addToCart(name, price, image) {
+  let cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
 
-  const optionsTitle = document.createElement('h3');
-  optionsTitle.textContent = `${category} Options`;
-  categoryOptionsDiv.appendChild(optionsTitle);
+  let itemImage = document.createElement("img");
+  itemImage.src = image;
+  itemImage.classList.add("cart-image");
+  cartItem.appendChild(itemImage);
 
-  options.forEach((option) => {
-    const optionElement = document.createElement('p');
-    optionElement.textContent = option;
-    categoryOptionsDiv.appendChild(optionElement);
-  });
+  let itemName = document.createElement("h3");
+  itemName.innerText = name;
+  cartItem.appendChild(itemName);
+
+  let itemPrice = document.createElement("p");
+  itemPrice.innerText = `$${price}`;
+  cartItem.appendChild(itemPrice);
+
+  let cart = document.getElementById("cart");
+  cart.appendChild(cartItem);
 }
-
 function clearCart() {
-  const cartItemsContainer = document.getElementById('cart-items-container');
-  cartItemsContainer.innerHTML = '';
+  let cart = document.getElementById("cart");
+  while (cart.firstChild) {
+    cart.removeChild(cart.firstChild);
+  }
+}
+function clearCart() {
+  let cartItems = document.getElementsByClassName("cart-item");
+  while (cartItems.length > 0) {
+    cartItems[0].remove();
+  }
 }
 
-function addToCart(productName, price, imageUrl) {
-  const cartItemsContainer = document.getElementById('cart-items-container');
-  const cartItem = document.createElement('div');
-  cartItem.classList.add('cart-item');
-
-  const productImage = document.createElement('img');
-  productImage.src = imageUrl; // Add the image source for the product
-
-  const productDetails = document.createElement('div');
-  const productNameElement = document.createElement('h3');
-  productNameElement.textContent = productName;
-  const priceElement = document.createElement('p');
-  priceElement.textContent = 'Price: $' + price;
-
-  productDetails.appendChild(productNameElement);
-  productDetails.appendChild(priceElement);
-
-  cartItem.appendChild(productImage);
-  cartItem.appendChild(productDetails);
-
-  cartItemsContainer.appendChild(cartItem);
-}
