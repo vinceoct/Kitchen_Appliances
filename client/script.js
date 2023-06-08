@@ -9,12 +9,16 @@ function toggleOptions(category) {
       categoryOptions.style.height = `${categoryOptions.scrollHeight}px`;
 
       if (category === 'air-fryers') {
+        deleteCategoryOptions('air-fryers'); 
         fetchAirfryerOptions();
       } else if (category === 'microwaves') {
+        deleteCategoryOptions('microwaves'); 
         fetchMicrowaveOptions();
       } else if (category === 'fridges') {
+        deleteCategoryOptions('fridges'); 
         fetchRefrigeratorOptions();
       } else if (category === 'all') {
+        deleteCategoryOptions('all'); 
         fetchAllOptions();
       }
     } else {
@@ -22,6 +26,15 @@ function toggleOptions(category) {
     }
   } else {
     console.error(`Category options with ID '${category}' not found.`);
+  }
+}
+
+function deleteCategoryOptions(category) {
+  const categoryOptions = document.getElementById(category);
+  if (categoryOptions) {
+    while (categoryOptions.firstChild) {
+      categoryOptions.firstChild.remove();
+    }
   }
 }
 
@@ -118,6 +131,7 @@ async function fetchMicrowaveOptions() {
 
     options.forEach((option) => {
       let itemDiv = document.createElement("div");
+      
 
       let itemName = document.createElement("h1");
       itemName.innerText = option.name;
@@ -150,6 +164,7 @@ async function fetchMicrowaveOptions() {
   } catch (error) {
     console.error('Error fetching Microwave options:', error);
   }
+
 }
 
 async function fetchRefrigeratorOptions() {
@@ -193,6 +208,7 @@ async function fetchRefrigeratorOptions() {
   } catch (error) {
     console.error('Error fetching Refrigerator options:', error);
   }
+  
 }
 async function fetchAllOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances';
@@ -236,9 +252,6 @@ async function fetchAllOptions() {
     console.error('Error fetching options:', error);
   }
 }
-
-
-
 
 function addToCart(name, price, image) {
   let cartItem = document.createElement("div");
