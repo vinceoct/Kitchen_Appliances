@@ -1,23 +1,31 @@
 function toggleOptions(category) {
   const categoryOptions = document.getElementById(category);
-  categoryOptions.classList.toggle('active');
-  const isActive = categoryOptions.classList.contains('active');
 
-  if (isActive) {
-    categoryOptions.style.height = `${categoryOptions.scrollHeight}px`;
+  if (categoryOptions) {
+    categoryOptions.classList.toggle('active');
+    const isActive = categoryOptions.classList.contains('active');
 
-    // Make separate requests for each category button
-    if (category === 'air-fryers') {
-      fetchAirfryerOptions();
-    } else if (category === 'microwaves') {
-      fetchMicrowaveOptions();
-    } else if (category === 'fridges') {
-      fetchRefrigeratorOptions();
+    if (isActive) {
+      categoryOptions.style.height = `${categoryOptions.scrollHeight}px`;
+
+      if (category === 'air-fryers') {
+        fetchAirfryerOptions();
+      } else if (category === 'microwaves') {
+        fetchMicrowaveOptions();
+      } else if (category === 'fridges') {
+        fetchRefrigeratorOptions();
+      } else if (category === 'all') {
+        fetchAllOptions();
+      }
+    } else {
+      categoryOptions.style.height = '0';
     }
   } else {
-    categoryOptions.style.height = '0';
+    console.error(`Category options with ID '${category}' not found.`);
   }
 }
+
+
 
 async function fetchAirfryerOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances/type/Airfryer';
@@ -148,6 +156,51 @@ async function fetchRefrigeratorOptions() {
     console.error('Error fetching Refrigerator options:', error);
   }
 }
+async function fetchAllOptions() {
+  const apiUrl = 'http://localhost:3001/api/appliances';
+
+  try {
+    const response = await axios.get(apiUrl);
+    const options = response.data.appliances;
+
+    options.forEach((option) => {
+      let itemDiv = document.createElement("div");
+
+      let itemName = document.createElement("h1");
+      itemName.innerText = option.name;
+      itemDiv.appendChild(itemName);
+
+      let itemPrice = document.createElement("h2");
+      itemPrice.innerText = "Price: $" + option.price;
+      itemDiv.appendChild(itemPrice);
+
+      let itemImage = document.createElement("img");
+      itemImage.src = option.image;
+      itemImage.classList.add("all");
+      itemDiv.appendChild(itemImage);
+
+      let itemDescrip = document.createElement("h2");
+      itemDescrip.innerText = option.description;
+      itemDiv.appendChild(itemDescrip);
+
+      let addToCartButton = document.createElement("button");
+      addToCartButton.innerText = "Add to Cart";
+      addToCartButton.classList.add("add-to-cart-button"); 
+      addToCartButton.addEventListener("click", function() {
+        addToCart(option.name, option.price, option.image);
+      });
+      itemDiv.appendChild(addToCartButton);
+
+      let categoryOptions = document.getElementById("all");
+      categoryOptions.appendChild(itemDiv);
+    });
+  } catch (error) {
+    console.error('Error fetching options:', error);
+  }
+}
+
+
+
 
 function addToCart(name, price, image) {
   let cartItem = document.createElement("div");
