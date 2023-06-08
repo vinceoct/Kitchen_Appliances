@@ -138,7 +138,11 @@ footer {
   background-color: rgb(59, 207, 158);
   color: #222;  
 }
-
+.all{
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
 .airFryer {
   height: 200px;
   object-fit: cover;
