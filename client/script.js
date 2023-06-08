@@ -69,6 +69,32 @@ async function fetchAirfryerOptions() {
     console.error('Error fetching Airfryer options:', error);
   }
 }
+async function addItem() {
+  const itemName = document.getElementById('item-name').value;
+  const itemPrice = parseFloat(document.getElementById('item-price').value);
+  const itemImage = document.getElementById('item-image').value;
+
+  const item = {
+    name: itemName,
+    price: itemPrice,
+    image: itemImage
+  };
+
+  const apiUrl = 'http://localhost:3001/api/appliances/add';
+
+  try {
+    const response = await axios.post(apiUrl, item);
+    if (response.status === 200) {
+      alert('Item added successfully!');
+      // Clear input fields after adding the item
+      document.getElementById('item-name').value = '';
+      document.getElementById('item-price').value = '';
+      document.getElementById('item-image').value = '';
+    }
+  } catch (error) {
+    console.error('Error adding item:', error);
+  }
+}
 
 
 async function fetchMicrowaveOptions() {
