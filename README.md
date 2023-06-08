@@ -1,2 +1,2 @@
-# Kitchen_Appliances
-Ecomm site for Kitchen Appliances. 
+# SRV Kitchen Appliances
+Ecomm site for Kitchen Appliances. Specifically Refrigerators, Air Fryers, and Microwaves.
