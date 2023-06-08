@@ -73,29 +73,41 @@ async function addItem() {
   const itemName = document.getElementById('item-name').value;
   const itemPrice = parseFloat(document.getElementById('item-price').value);
   const itemImage = document.getElementById('item-image').value;
+  const itemDescrip = document.getElementById('item-descrip').value;
+  const itemType = document.getElementById('item-type').value;
+  const itemBrand = document.getElementById('item-brand').value;
 
   const item = {
     name: itemName,
+    brand: itemBrand,
+    type: itemType,
+    description: itemDescrip,
     price: itemPrice,
-    image: itemImage
+    image: itemImage,
   };
 
-  const apiUrl = 'http://localhost:3001/api/appliances/add';
+  const apiUrl = 'http://localhost:3001/api/appliances/';
 
   try {
     const response = await axios.post(apiUrl, item);
     if (response.status === 200) {
       alert('Item added successfully!');
-      // Clear input fields after adding the item
-      document.getElementById('item-name').value = '';
-      document.getElementById('item-price').value = '';
-      document.getElementById('item-image').value = '';
+       
     }
   } catch (error) {
     console.error('Error adding item:', error);
   }
+  clearItemFields();
 }
 
+function clearItemFields() {
+  document.getElementById('item-name').value = '';
+  document.getElementById('item-price').value = '';
+  document.getElementById('item-image').value = '';
+  document.getElementById('item-type').value = '';
+  document.getElementById('item-brand').value = '';
+  document.getElementById('item-descrip').value = '';
+}
 
 async function fetchMicrowaveOptions() {
   const apiUrl = 'http://localhost:3001/api/appliances/type/Microwave';
